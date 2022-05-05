@@ -1,6 +1,6 @@
-import streamlit
-import pandas
-import requests 
+# import streamlit
+# import pandas
+# import requests 
 
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list = my_fruit_list.set_index('Fruit')
@@ -33,7 +33,14 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # output the screen as table
 streamlit.dataframe(fruityvice_normalized)
 
+#don't run anything past here while we troubleshoot
+streamlit.stop()
+
 import snowflake.connector
+import streamlit
+import pandas
+import requests 
+from urllib.error import URLError
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("insert into fruit_load_list values ('from stramlit')")
